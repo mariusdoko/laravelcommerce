@@ -46,7 +46,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text  bg-transparent text-white"><i class="ti-lock"></i></span>
                                     </div>
-                                    <input type="password" id="password" name="password" class="form-control pl-15 bg-transparent text-white plc-white" placeholder="Password">
+     <input type="password" id="password" name="password" class="form-control pl-15 bg-transparent text-white plc-white" placeholder="Password">
                                 </div>
                             </div>
                             <div class="row">
@@ -81,7 +81,7 @@
                         </div>
 
                         <div class="text-center">
-                            <p class="mt-15 mb-0 text-white">Don't have an account? <a href="{{ route('register') }}" class="text-info ml-5">Register</a></p>
+                            <p class="mt-15 mb-0 text-white">Don't have an account? <a href="auth_register.html" class="text-info ml-5">Sign Up</a></p>
                         </div>
                     </div>
                 </div>
