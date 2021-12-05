@@ -35,6 +35,7 @@
                                             @enderror
 
                                         </div>
+                                    </div>
 
                                         <div class="form-group">
                                             <h5>SubCategory English <span class="text-danger">*</span></h5>
