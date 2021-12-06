@@ -9,6 +9,8 @@ use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\ProductController;
+use App\Http\Controllers\Backend\SliderController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,6 +28,7 @@ Route::group(['prefix'=> 'admin', 'middleware'=>['admin:admin']], function(){
    Route::post('/login', [AdminController::class, 'store'])->name('admin.login');
 });
 
+Route::middleware(['auth:admin'])->group(function(){
 
 Route::middleware(['auth:sanctum,admin', 'verified'])->get('/admin/dashboard', function () {
     return view('admin.index');
@@ -39,21 +42,6 @@ Route::get('/admin/profile/edit', [AdminProfileController::class, 'AdminProfileE
 Route::post('/admin/profile/store', [AdminProfileController::class, 'AdminProfileStore' ])->name('admin.profile.store');
 Route::get('/admin/change/password', [AdminProfileController::class, 'AdminChangePassword' ])->name('admin.change.password');
 Route::post('/admin/change/password', [AdminProfileController::class, 'AdminUpdateChangePassword' ])->name('update.change.password');
-
-// User All Route
-
-Route::middleware(['auth:sanctum,web', 'verified'])->get('/dashboard', function () {
-    $id = Auth::user()->id;
-    $user = User::find($id);
-    return view('dashboard', compact('user'));
-})->name('dashboard');
-
-Route::get('/', [IndexController::class, 'index' ]);
-Route::get('/user/logout', [IndexController::class, 'UserLogout' ])->name('user.logout');
-Route::get('/user/profile', [IndexController::class, 'UserProfile' ])->name('user.profile');
-Route::post('/user/profile/store', [IndexController::class, 'UserProfileStore' ])->name('user.profile.store');
-Route::get('/user/change/password', [IndexController::class, 'UserChangePassword' ])->name('change.password');
-Route::post('/user/password/update', [IndexController::class, 'UserPasswordUpdate' ])->name('user.password.update');
 
 // Admin Brand ALl Routes
 
@@ -109,6 +97,38 @@ Route::prefix('product')->group(function(){
     Route::get('/delete/{id}', [ProductController::class, 'ProductDelete' ])->name('product.delete');
     Route::get('/details/{id}', [ProductController::class, 'ProductDetails' ])->name('product.details');
 
+});
+
+// Admin Slider ALl Routes
+
+Route::prefix('slider')->group(function(){
+    Route::get('/view', [SliderController::class, 'SliderView' ])->name('manage-slider');
+    Route::post('/store', [SliderController::class, 'SliderStore' ])->name('slider.store');
+    Route::get('/edit/{id}', [SliderController::class, 'SliderEdit' ])->name('slider.edit');
+    Route::post('/update', [SliderController::class, 'SliderUpdate' ])->name('slider.update');
+    Route::get('/delete/{id}', [SliderController::class, 'SliderDelete'])->name('slider.delete');
+    Route::get('/inactive/{id}', [SliderController::class, 'SliderInactive' ])->name('slider.inactive');
+    Route::get('/active/{id}', [SliderController::class, 'SliderActive' ])->name('slider.active');
 
 });
+
+
+}); // end middleware
+
+
+// User All Route
+
+Route::middleware(['auth:sanctum,web', 'verified'])->get('/dashboard', function () {
+    $id = Auth::user()->id;
+    $user = User::find($id);
+    return view('dashboard', compact('user'));
+})->name('dashboard');
+
+Route::get('/', [IndexController::class, 'index' ]);
+Route::get('/user/logout', [IndexController::class, 'UserLogout' ])->name('user.logout');
+Route::get('/user/profile', [IndexController::class, 'UserProfile' ])->name('user.profile');
+Route::post('/user/profile/store', [IndexController::class, 'UserProfileStore' ])->name('user.profile.store');
+Route::get('/user/change/password', [IndexController::class, 'UserChangePassword' ])->name('change.password');
+Route::post('/user/password/update', [IndexController::class, 'UserPasswordUpdate' ])->name('user.password.update');
+
 

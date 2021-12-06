@@ -227,7 +227,7 @@ class ProductController extends Controller
     } // end method
 
 
-    // Active or Active 
+    // Inactive or Active 
     public function ProductInactive($id){
         Product::findOrFail($id)->update(['status' => 0]);
         $notification = array(
