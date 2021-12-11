@@ -10,7 +10,7 @@ use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\SliderController;
-
+use App\Http\Controllers\Frontend\LanguageController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,7 +32,7 @@ Route::middleware(['auth:admin'])->group(function(){
 
 Route::middleware(['auth:sanctum,admin', 'verified'])->get('/admin/dashboard', function () {
     return view('admin.index');
-})->name('dashboard');
+})->name('dashboard')->middleware('auth:admin');
 
 // Admin All Routes
 Route::get('/admin/logout', [AdminController::class, 'destroy' ])->name('admin.logout');
@@ -119,9 +119,9 @@ Route::prefix('slider')->group(function(){
 // User All Route
 
 Route::middleware(['auth:sanctum,web', 'verified'])->get('/dashboard', function () {
-    $id = Auth::user()->id;
+	$id = Auth::user()->id;
     $user = User::find($id);
-    return view('dashboard', compact('user'));
+    return view('dashboard',compact('user'));
 })->name('dashboard');
 
 Route::get('/', [IndexController::class, 'index' ]);
@@ -131,4 +131,8 @@ Route::post('/user/profile/store', [IndexController::class, 'UserProfileStore' ]
 Route::get('/user/change/password', [IndexController::class, 'UserChangePassword' ])->name('change.password');
 Route::post('/user/password/update', [IndexController::class, 'UserPasswordUpdate' ])->name('user.password.update');
 
+// Frontend All Routes
+/// Multi Language All Routes
 
+Route::get('/language/albanian', [LanguageController::class, 'Albanian' ])->name('albanian.language');
+Route::get('/language/english', [LanguageController::class, 'English' ])->name('english.language');
