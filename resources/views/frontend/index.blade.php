@@ -1,6 +1,10 @@
 @extends('frontend.main_master')
 @section('content')
 
+@section('title')
+Home Marius Online Shop
+@endsection
+
     <div class="body-content outer-top-xs" id="top-banner-and-menu">
         <div class="container">
             <div class="row">
@@ -970,7 +974,7 @@ $subcategories = App\Models\SubCategory::where('category_id',$category->id)->ord
                                   <div class="products">
                                     <div class="product">
                                       <div class="product-image">
-                     <div class="image"> <a href=""><img  src="{{ asset($product->product_thumbnail) }}" alt=""></a> </div>
+                     <div class="image"> <a href="{{ url('product/details/'.$product->id.'/'.$product->product_slug_en)}}"><img  src="{{ asset($product->product_thumbnail) }}" alt=""></a> </div>
                                         <!-- /.image -->
               
                       @php
@@ -990,7 +994,7 @@ $subcategories = App\Models\SubCategory::where('category_id',$category->id)->ord
                                       <!-- /.product-image -->
                                       
                       <div class="product-info text-left">
-                        <h3 class="name"><a href="detail.html">
+                        <h3 class="name"><a href="{{ url('product/details/'.$product->id.'/'.$product->product_slug_en)}}">
               @if(session()->get('language') == 'albanian') {{ $product->product_name_al }} @else {{ $product->product_name_en }} @endif
                           </a></h3>
                         <div class="rating rateit-small"></div>
@@ -1064,7 +1068,7 @@ $subcategories = App\Models\SubCategory::where('category_id',$category->id)->ord
                                   <div class="products">
                                     <div class="product">
                                       <div class="product-image">
-                                        <div class="image"> <a href=""><img  src="{{ asset($product->product_thumbnail) }}" alt=""></a> </div>
+                                        <div class="image"> <a href="{{ url('product/details/'.$product->id.'/'.$product->product_slug_en)}}"><img  src="{{ asset($product->product_thumbnail) }}" alt=""></a> </div>
                                         <!-- /.image -->
               
                       @php
@@ -1084,7 +1088,7 @@ $subcategories = App\Models\SubCategory::where('category_id',$category->id)->ord
                                       <!-- /.product-image -->
                                       
                       <div class="product-info text-left">
-                        <h3 class="name"><a href="detail.html">
+                        <h3 class="name"><a href="{{ url('product/details/'.$product->id.'/'.$product->product_slug_en)}}">
               @if(session()->get('language') == 'albanian') {{ $product->product_name_al }} @else {{ $product->product_name_en }} @endif
                           </a></h3>
                         <div class="rating rateit-small"></div>
