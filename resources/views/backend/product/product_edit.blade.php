@@ -388,7 +388,7 @@
                         <label for="checkbox_2">Hot Deals</label>
                     </fieldset>
                     <fieldset>
-                        <input type="checkbox" id="checkbox_3"  name="featured" value="y" {{ $products->features == 1 ? 'checked': ''}}>
+                        <input type="checkbox" id="checkbox_3"  name="featured" value="1" {{ $products->features == 1 ? 'checked': ''}}>
                         <label for="checkbox_3">Featured</label>
                     </fieldset>
                 </div>
